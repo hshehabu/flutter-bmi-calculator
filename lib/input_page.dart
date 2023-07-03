@@ -32,31 +32,23 @@ class _InputPageState extends State<InputPage> {
               child: Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
+                    child: ReusableCard(
+                      colour: gender == Gender.male
+                          ? activeCardColor
+                          : inActiveCardColor,
+                      cardChild: const IconContent(
+                        icon: FontAwesomeIcons.mars,
+                        label: 'MALE',
+                      ),
+                      function: () {
                         setState(() {
                           gender = Gender.male;
                         });
                       },
-                      child: ReusableCard(
-                        colour: gender == Gender.male
-                            ? activeCardColor
-                            : inActiveCardColor,
-                        cardChild: const IconContent(
-                          icon: FontAwesomeIcons.mars,
-                          label: 'MALE',
-                        ),
-                      ),
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          gender = Gender.female;
-                        });
-                      },
-                      child: ReusableCard(
+                    child: ReusableCard(
                         colour: gender == Gender.female
                             ? activeCardColor
                             : inActiveCardColor,
@@ -64,9 +56,12 @@ class _InputPageState extends State<InputPage> {
                           icon: FontAwesomeIcons.venus,
                           label: 'FEMALE',
                         ),
-                      ),
-                    ),
-                  )
+                        function: () {
+                          setState(() {
+                            gender = Gender.female;
+                          });
+                        }),
+                  ),
                 ],
               ),
             ),
