@@ -15,7 +15,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender? gender;
-
+  int height = 180;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,12 +66,43 @@ class _InputPageState extends State<InputPage> {
               children: [
                 Expanded(
                   child: ReusableCard(
-                    cardChild: Column(children: const [
-                      Text(
-                        'HEIGHT',
-                        style: kLabelStyle,
-                      ),
-                    ]),
+                    cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'HEIGHT',
+                            style: kLabelStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                '$height',
+                                style: kNumberTextStyle,
+                              ),
+                              const Text(
+                                'cm',
+                                style: kLabelStyle,
+                              ),
+
+                            ],
+                          ),
+                          Slider(
+                            activeColor: kBottomContainerColor,
+                            inactiveColor: const Color(0xFF8D8E98),
+                            thumbColor: kBottomContainerColor,
+                            max: 220.0,
+                            min: 100.0,
+                            value: height.toDouble(),
+                            onChanged: (double value) {
+                              setState(() {
+                                height = value.round();
+                              });
+                            },
+                          )
+                        ]),
                     colour: kActiveCardColor,
                   ),
                 ),
