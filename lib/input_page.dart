@@ -86,21 +86,29 @@ class _InputPageState extends State<InputPage> {
                                 'cm',
                                 style: kLabelStyle,
                               ),
-
                             ],
                           ),
-                          Slider(
-                            activeColor: kBottomContainerColor,
-                            inactiveColor: const Color(0xFF8D8E98),
-                            thumbColor: kBottomContainerColor,
-                            max: 220.0,
-                            min: 100.0,
-                            value: height.toDouble(),
-                            onChanged: (double value) {
-                              setState(() {
-                                height = value.round();
-                              });
-                            },
+                          SliderTheme(
+                            data: SliderTheme.of(context).copyWith(
+                              activeTrackColor: Colors.white,
+                              inactiveTrackColor: const Color(0xFF8D8E98),
+                              thumbColor: kBottomContainerColor,
+                              overlayColor: const Color(0x29EB1555),
+                              thumbShape: const RoundSliderThumbShape(
+                                  enabledThumbRadius: 15.0),
+                              overlayShape: const RoundSliderOverlayShape(
+                                  overlayRadius: 30.0),
+                            ),
+                            child: Slider(
+                              max: 220.0,
+                              min: 100.0,
+                              value: height.toDouble(),
+                              onChanged: (double value) {
+                                setState(() {
+                                  height = value.round();
+                                });
+                              },
+                            ),
                           )
                         ]),
                     colour: kActiveCardColor,
