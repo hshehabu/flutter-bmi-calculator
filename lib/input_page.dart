@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bmi_calculator/results_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'bottom_container.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'constants.dart';
@@ -143,7 +145,7 @@ class _InputPageState extends State<InputPage> {
                                 icon: FontAwesomeIcons.minus,
                                 onPressed: () {
                                   setState(() {
-                                    if(weight > 0) {
+                                    if (weight > 0) {
                                       weight--;
                                     }
                                   });
@@ -187,9 +189,9 @@ class _InputPageState extends State<InputPage> {
                                 icon: FontAwesomeIcons.minus,
                                 onPressed: () {
                                   setState(() {
-                                   if(age > 0) {
-                                     age--;
-                                   }
+                                    if (age > 0) {
+                                      age--;
+                                    }
                                   });
                                 },
                               ),
@@ -213,11 +215,16 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              color: kBottomContainerColor,
-              margin: const EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: kBottomContainerHeight,
+            BottomContainer(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ResultsPage(),
+                  ),
+                );
+              },
+              text: 'CALCULATE YOUR BMI',
             ),
           ],
         ));
