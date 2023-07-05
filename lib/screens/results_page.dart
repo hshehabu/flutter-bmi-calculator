@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bmi_calculator/constants.dart';
-import 'package:flutter_bmi_calculator/reusable_card.dart';
+import 'package:flutter_bmi_calculator/components/reusable_card.dart';
 
-import 'bottom_container.dart';
+import '../components/bottom_container.dart';
 
 class ResultsPage extends StatelessWidget {
-  const ResultsPage({super.key});
-
+  const ResultsPage({super.key, required this.bmi, required this.result, required this.interpretation});
+ final String bmi;
+ final String result;
+ final String interpretation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +19,14 @@ class ResultsPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Expanded(
-              child: Text(
-                'YOUR RESULT',
-                style: kTitleTextStyle,
+             Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(15.0),
+                alignment: Alignment.bottomLeft,
+                child: const Text(
+                  'YOUR RESULT',
+                  style: kTitleTextStyle,
+                ),
               ),
             ),
             Expanded(
@@ -30,17 +36,21 @@ class ResultsPage extends StatelessWidget {
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
+                    children:  [
                       Text(
-                        'result',
-                        style: kResultTextStyle,
+                        result.toUpperCase(),
+                        style: TextStyle(
+                            color: result == 'overweight' || result == 'underweight' ? Colors.redAccent : const Color(0xFF24D876) ,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold
+                        ),
                       ),
                       Text(
-                        '19.5',
+                        bmi,
                         style: kBMIText,
                       ),
                       Text(
-                        'Your BMI result is quite low ,you should eat more',
+                        interpretation,
                         style: kLabelStyle,
                         textAlign: TextAlign.center,
                       )
@@ -49,6 +59,7 @@ class ResultsPage extends StatelessWidget {
                 )),
              BottomContainer(
               onTap: (){
+                Navigator.pop(context);
               },
               text: 'RE_CALCULATE',
             )
